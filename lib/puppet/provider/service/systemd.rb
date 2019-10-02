@@ -44,7 +44,7 @@ Puppet::Type.type(:service).provide :systemd, :parent => :base do
   # in the provider's believed state of the service and the actual state.
   # @param action [String,Symbol] One of 'enable', 'disable', 'mask' or 'unmask'
   def systemctl_change_enable(action)
-    output = systemctl(action, @resource[:name])
+    output = systemctl(action, '--', @resource[:name])
   rescue
     raise Puppet::Error, "Could not #{action} #{self.name}: #{output}", $!.backtrace
   ensure
